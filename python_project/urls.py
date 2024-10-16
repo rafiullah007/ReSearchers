@@ -24,4 +24,5 @@ urlpatterns = [
     path('profile/',s_views.profile,name = 'profile'),
 
 
+
 ]
