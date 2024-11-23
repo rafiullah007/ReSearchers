@@ -11,7 +11,7 @@ class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     id_user = models.IntegerField(primary_key=True, default=0)
     bio = models.TextField(blank=True, default='')
-    profileimg = models.ImageField(upload_to='profile_images', default='blank-profile-picture.png')
+    profileimg = models.ImageField(upload_to='media/profile_images', default='media/blank-profile-picture.png')
     location = models.CharField(max_length=100, blank=True, default='')
 
     def __str__(self):
@@ -21,7 +21,7 @@ class Profile(models.Model):
 class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     user = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='post_images')
+    image = models.ImageField(upload_to='media/post_images')
     caption = models.TextField()
     created_at = models.DateTimeField(default=datetime.now)
     no_of_likes = models.IntegerField(default=0)
