@@ -103,6 +103,7 @@ def likes(request, id):
         post.save()
 
         # Post's detail URL
+                                                                 ## ahsan habib pulll
         print(post.id)
 
         # Redirect  post details page
