@@ -6,7 +6,7 @@ from datetime import datetime
 User = get_user_model()
 
 #Rafiullah Al Naim #Ahsan Habib # Mesbah
-# Create your models here.
+#Models :
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     id_user = models.IntegerField(primary_key=True, default=0)

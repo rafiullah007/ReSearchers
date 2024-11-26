@@ -102,10 +102,10 @@ def likes(request, id):
 
         post.save()
 
-        # Generate the URL for the current post's detail page
+        # Post's detail URL
         print(post.id)
 
-        # Redirect back to the post's detail page
+        # Redirect  post details page
         return redirect('/#' + id)
 
 
