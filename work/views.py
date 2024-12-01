@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Followers, LikePost, Post, Profile
+from .models import Followers, LikePost, Post, Profile,Comment
 from django.db.models import Q
 
 
@@ -24,12 +24,9 @@ def signup(request):
                 login(request, my_user)
                 return redirect('/')
             return redirect('/loginn')
-
-
     except:
         invalid = "User already exists"
         return render(request, 'signup.html', {'invalid': invalid})
-
     return render(request, 'signup.html')
 
 
@@ -103,7 +100,6 @@ def likes(request, id):
         post.save()
 
         # Post's detail URL
-                                                                 ## ahsan habib pulll
         print(post.id)
 
         # Redirect  post details page
@@ -202,6 +198,18 @@ def search_results(request):
         'posts': posts,
     }
     return render(request, 'search_user.html', context)
+
+@login_required
+def add_comment(request, post_id):
+    if request.method == "POST":
+        post = get_object_or_404(Post, id=post_id)
+        text = request.POST.get('comment')
+
+        if text:
+            Comment.objects.create(post=post, user=request.user, text=text)
+            return redirect('/')
+
+    return HttpResponse(status=400)
 
 
 def home_post(request, id):

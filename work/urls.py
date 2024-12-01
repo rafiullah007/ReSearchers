@@ -17,5 +17,6 @@ urlpatterns = [
     path('delete/<str:id>', views.delete),
     path('search-results/', views.search_results, name='search_results'),
     path('follow', views.follow, name='follow'),
+    path('add-comment/<uuid:post_id>/', views.add_comment, name='add_comment'),
 
 ]
