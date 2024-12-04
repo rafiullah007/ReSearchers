@@ -256,7 +256,7 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title">
                                                         <div class="post-caption" id="caption-{{ pos.id}}">
-                                                            <span class="caption-text">{{ pos.caption|truncatewords:20 }}</span>
+                                                            <span class="caption-text">{{ pos.caption|truncatewords:2000}}</span>
                                                             {% if pos.caption|length > 60 %}
                                                             <button class="btn btn-link show-more-btn" onclick="toggleCaption('{{ pos.id }}')">Show More</button>
                                                             {% endif %}
