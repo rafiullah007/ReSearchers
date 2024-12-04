@@ -52,6 +52,34 @@
             max-width: 100%;
             height: auto;
         }
+
+
+      .post-caption {
+        max-height: 60px;
+        overflow: hidden;
+        position: relative;
+        transition: max-height 0.3s ease;
+      }
+
+      .post-caption.expanded {
+        max-height: none;
+      }
+
+      .show-more-btn {
+        position: absolute;
+        bottom: 5px;
+        right: 0;
+        background: transparent;
+        border: none;
+        color: #007bff;
+        cursor: pointer;
+      }
+
+     .show-more-btn:focus {
+        outline: none;
+     }
+
+
     </style>
 </head>
 
@@ -179,13 +207,10 @@
                                             <div class="p-4" style="background-color: #f8f9fa;">
                                                 <p class="font-italic mb-1">{{user_profile.bio}}</p>
                                             </div>
-
                                         </div>
+
                                         <div class="mb-5">
                                             <p class="lead fw-normal mb-1">Posts</p>
-
-
-
                                         </div>
                                         <div class="image-grid">
                                             {% for pos in user_posts %}
@@ -194,23 +219,23 @@
                                                     style="width: 219px;height: 219px;">
 
                                                 <div class="card-body">
-                                                    <h5 class="card-title">{{pos.caption}}</h5>
-                                                    {% if user == user_profile.user %} <a href=" /delete/{{pos.id}} "><i
-                                                            class="fa-solid fa-trash"></i></a>
+                                                    <h5 class="card-title">
+                                                        <div class="post-caption" id="caption-{{ pos.id}}">
+                                                            <span class="caption-text">{{ pos.caption|truncatewords:20 }}</span>
+                                                            {% if pos.caption|length > 60 %}
+                                                            <button class="btn btn-link show-more-btn" onclick="toggleCaption('{{ pos.id }}')">Show More</button>
+                                                            {% endif %}
+                                                        </div>
+                                                    </h5>
 
-
+                                                    {% if user == user_profile.user %}
+                                                    <a href="/delete/{{ pos.id }}"><i class="fa-solid fa-trash"></i></a>
                                                     {% endif %}
                                                 </div>
+                                                {% endfor %}
                                             </div>
-
-
-                                            {% endfor %}
-                                        </div>
-
-
-
+                                       </div>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -226,6 +251,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+
+    <script>
+    function toggleCaption(postId) {
+        var caption = document.getElementById("caption-" + postId);
+        var showMoreButton = caption.querySelector(".show-more-btn");
+
+        // Toggle between showing and hiding the full caption
+        if (caption.classList.contains("expanded")) {
+            caption.classList.remove("expanded");
+            showMoreButton.innerText = "Show More";
+        } else {
+            caption.classList.add("expanded");
+            showMoreButton.innerText = "Show Less";
+        }
+    }
+    </script>
 </body>
 
 </html>

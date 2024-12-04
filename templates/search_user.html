@@ -1,21 +1,140 @@
-               
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
 
-                <h1>Search Results for "{{ query }}"</h1>
-                <div class="container">
-                    <h2>User Profiles</h2>
-                    
-                    <table class="table">
-                        
-                        <tbody>
-                            {% for user in users %}
-                            <tr>
-                                <td><h1><strong><a href="/profile/{{user.user.username}}">@{{user.user.username}}</a> </strong></h1></td>
-                                
-                            </tr>
-                            {% endfor %}
-                            
-                            
-                        </tbody>
-                    </table>
-                </div>
-                
+        h1, h2 {
+            color: #444;
+            font-weight: 600;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #ffffff;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            border-top: 4px solid #007BFF;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table tbody tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .table tbody tr td {
+            padding: 15px;
+            text-align: left;
+            font-size: 1.2rem;
+        }
+
+        .table a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: 500;
+            transition: color 0.3s, transform 0.3s ease;
+        }
+
+        .table a:hover {
+            color: #0056b3;
+            transform: translateX(5px);
+        }
+
+        .table a:focus {
+            outline: none;
+        }
+
+        /* Add a subtle border and spacing to the links */
+        .table a {
+            display: inline-block;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #f1f1f1;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .table a:hover {
+            background-color: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .table td h2 {
+            margin: 0;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 20px;
+                margin: 15px;
+            }
+
+            .table tbody tr td {
+                font-size: 1rem;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Results for "{{ query }}"</h1>
+    <div class="container">
+        <h2>User Profiles</h2>
+        <table class="table">
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>
+                        <h2>
+                            <strong>
+                                <a href="/profile/{{ user.user.username }}">@{{ user.user.username }}</a>
+                            </strong>
+                        </h2>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
