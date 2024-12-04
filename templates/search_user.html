@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,30 +9,30 @@
         /* General styles */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
+            background-color: #f1f3f5;
             margin: 0;
             padding: 0;
             color: #333;
             line-height: 1.6;
         }
 
-        h1, h2 {
-            color: #444;
-            font-weight: 600;
-        }
-
         h1 {
+            color: #ffffff;
             text-align: center;
             margin-top: 50px;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            padding: 20px;
+            background: linear-gradient(45deg, #007BFF, #00C6FF);
+            border-radius: 10px;
         }
 
         h2 {
             color: #333;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             margin-bottom: 20px;
+            color: #444;
         }
 
         .container {
@@ -42,6 +43,7 @@
             border-radius: 12px;
             padding: 30px;
             border-top: 4px solid #007BFF;
+            background-color: #f9f9f9;
         }
 
         .table {
@@ -55,7 +57,7 @@
         }
 
         .table tbody tr:hover {
-            background-color: #f8f9fa;
+            background-color: #f1f3f5;
         }
 
         .table tbody tr td {
@@ -67,35 +69,31 @@
         .table a {
             text-decoration: none;
             color: #007BFF;
-            font-weight: 500;
-            transition: color 0.3s, transform 0.3s ease;
-        }
-
-        .table a:hover {
-            color: #0056b3;
-            transform: translateX(5px);
-        }
-
-        .table a:focus {
-            outline: none;
-        }
-
-        /* Add a subtle border and spacing to the links */
-        .table a {
+            font-weight: 600;
+            transition: color 0.3s, transform 0.3s ease, background-color 0.3s;
             display: inline-block;
             padding: 10px;
             border-radius: 8px;
-            background-color: #f1f1f1;
-            transition: background-color 0.3s, transform 0.3s;
+            background-color: #f8f9fa;
         }
 
         .table a:hover {
-            background-color: #e9ecef;
+            color: #fff;
+            background-color: #007BFF;
             transform: translateX(5px);
         }
 
         .table td h2 {
             margin: 0;
+            color: #333;
+        }
+
+        /* Add a gradient background to the header */
+        h1 {
+            background: linear-gradient(45deg, #007BFF, #00C6FF);
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
         }
 
         /* Mobile responsiveness */
@@ -113,9 +111,15 @@
                 font-size: 1rem;
                 padding: 12px;
             }
+
+            .table a {
+                padding: 8px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
+
 <body>
     <h1>Search Results for "{{ query }}"</h1>
     <div class="container">
@@ -137,4 +141,5 @@
         </table>
     </div>
 </body>
+
 </html>
