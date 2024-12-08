@@ -13,95 +13,120 @@
 
     <title>{{user_profile.user}}</title>
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
-    <style>
-                /* Sidebar styles */
-        .sidebar {
-            background-color: #2c3e50;
-            height: 100vh;
-            color: white;
-            position: fixed;
-            width: 250px;
-            padding-top: 20px;
-            transition: width 0.3s ease;
-        }
+<style>
+    /* Sidebar styles */
+    .sidebar {
+        background-color: #2c3e50;
+        height: 100vh;
+        color: white;
+        position: fixed;
+        width: 250px;
+        padding-top: 20px;
+        transition: width 0.3s ease;
+    }
 
-        .sidebar:hover {
-            width: 280px;
-        }
+    .sidebar:hover {
+        width: 280px;
+    }
 
-        .sidebar .profile-pic {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #007bff;
-        }
+    .sidebar .profile-pic {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #007bff;
+    }
 
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-            padding: 15px 25px;
-            border-radius: 5px;
-            display: block;
-            font-size: 1.1rem;
-            transition: background-color 0.3s ease, padding-left 0.3s ease;
-        }
+    .sidebar a {
+        color: white;
+        text-decoration: none;
+        padding: 15px 25px;
+        border-radius: 5px;
+        display: block;
+        font-size: 1.1rem;
+        transition: background-color 0.3s ease, padding-left 0.3s ease;
+    }
 
-        .sidebar a:hover {
-            background-color: #2980b9;
-            padding-left: 30px;
-        }
+    .sidebar a:hover {
+        background-color: #2980b9;
+        padding-left: 30px;
+    }
 
-        .sidebar .nav-item.active a {
-            background-color: #007bff;
-            padding-left: 30px;
-        }
+    .sidebar .nav-item.active a {
+        background-color: #007bff;
+        padding-left: 30px;
+    }
 
-        .profile-pic {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+    /* Card styles */
+    .card {
+        border: none; /* Clean, modern look */
+        border-radius: 15px; /* Rounded corners for elegance */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+        background-color: #ffffff; /* Neutral white background */
+        overflow: hidden; /* Keeps rounded corners intact for children */
+        width: 100%; /* Full width */
+        margin: 20px auto; /* Centers the card */
+    }
 
-        a {
-            color: black;
-        }
+    .card img {
+        border-bottom: 2px solid #f0f0f0; /* Adds separation between image and body */
+        border-radius: 15px 15px 0 0; /* Rounded corners for top image */
+    }
 
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
-        }
+    .card-body {
+        padding: 20px; /* Ample space for text */
+        font-family: Arial, sans-serif;
+        color: #333333; /* Dark gray for good contrast */
+    }
 
-        .image-item {
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
+    .card-body h5 {
+        font-weight: bold;
+        color: #2c3e50; /* Matches sidebar theme */
+    }
 
-        .image-item:hover {
-            border: 1px solid #777;
+    .card-body p {
+        color: #6c757d; /* Muted text for secondary content */
+    }
 
-        }
+    .card-body a {
+        color: #007bff;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
 
-        .image-item img {
-            max-width: 100%;
-            height: auto;
-        }
+    .card-body a:hover {
+        text-decoration: underline;
+    }
 
+    /* Grid layout */
+    .image-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Wider cards */
+        gap: 20px; /* More spacing between cards */
+    }
 
-      .post-caption {
+    .image-item {
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+    }
+
+    .image-item:hover {
+        transform: scale(1.05); /* Slight zoom effect */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    }
+
+    /* Caption styles */
+    .post-caption {
         max-height: 60px;
         overflow: hidden;
         position: relative;
         transition: max-height 0.3s ease;
-      }
+    }
 
-      .post-caption.expanded {
+    .post-caption.expanded {
         max-height: none;
-      }
+    }
 
-      .show-more-btn {
+    .show-more-btn {
         position: absolute;
         bottom: 5px;
         right: 0;
@@ -109,14 +134,13 @@
         border: none;
         color: #007bff;
         cursor: pointer;
-      }
+    }
 
-     .show-more-btn:focus {
+    .show-more-btn:focus {
         outline: none;
-     }
+    }
+</style>
 
-
-    </style>
 </head>
 
 <body>
