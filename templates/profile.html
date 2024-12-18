@@ -14,131 +14,174 @@
     <title>{{user_profile.user}}</title>
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
 <style>
-    /* Sidebar styles */
-    .sidebar {
-        background-color: #2c3e50;
-        height: 100vh;
-        color: white;
-        position: fixed;
-        width: 250px;
-        padding-top: 20px;
-        transition: width 0.3s ease;
-    }
+/* Sidebar styles */
+.sidebar {
+    background-color: #2c3e50;
+    height: 100vh;
+    color: white;
+    position: fixed;
+    width: 250px;
+    padding-top: 20px;
+    transition: width 0.3s ease-in-out, box-shadow 0.3s ease;
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2); /* Added depth */
+}
 
-    .sidebar:hover {
-        width: 280px;
-    }
+.sidebar:hover {
+    width: 280px;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3); /* Enhanced hover effect */
+}
 
-    .sidebar .profile-pic {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid #007bff;
-    }
+.sidebar .profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #007bff;
+    margin: 10px auto;
+    display: block; /* Center the profile picture */
+    transition: transform 0.3s ease;
+}
 
-    .sidebar a {
-        color: white;
-        text-decoration: none;
-        padding: 15px 25px;
-        border-radius: 5px;
-        display: block;
-        font-size: 1.1rem;
-        transition: background-color 0.3s ease, padding-left 0.3s ease;
-    }
+.sidebar .profile-pic:hover {
+    transform: scale(1.1); /* Subtle zoom effect */
+}
 
-    .sidebar a:hover {
-        background-color: #2980b9;
-        padding-left: 30px;
-    }
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    border-radius: 8px; /* Slightly rounded for softer design */
+    display: block;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, padding-left 0.3s ease, box-shadow 0.3s ease;
+}
 
-    .sidebar .nav-item.active a {
-        background-color: #007bff;
-        padding-left: 30px;
-    }
+.sidebar a:hover {
+    background-color: #2980b9;
+    padding-left: 30px;
+    box-shadow: inset 3px 0 10px rgba(0, 0, 0, 0.2); /* Subtle inner shadow */
+}
 
-    /* Card styles */
-    .card {
-        border: none; /* Clean, modern look */
-        border-radius: 15px; /* Rounded corners for elegance */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-        background-color: #ffffff; /* Neutral white background */
-        overflow: hidden; /* Keeps rounded corners intact for children */
-        width: 100%; /* Full width */
-        margin: 20px auto; /* Centers the card */
-    }
+.sidebar .nav-item.active a {
+    background-color: #007bff;
+    padding-left: 30px;
+}
 
-    .card img {
-        border-bottom: 2px solid #f0f0f0; /* Adds separation between image and body */
-        border-radius: 15px 15px 0 0; /* Rounded corners for top image */
-    }
+/* Card styles */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    overflow: hidden;
+    width: 100%;
+    margin: 20px auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-    .card-body {
-        padding: 20px; /* Ample space for text */
-        font-family: Arial, sans-serif;
-        color: #333333; /* Dark gray for good contrast */
-    }
+.card:hover {
+    transform: translateY(-5px); /* Lift effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
 
-    .card-body h5 {
-        font-weight: bold;
-        color: #2c3e50; /* Matches sidebar theme */
-    }
+.card img {
+    border-bottom: 2px solid #f0f0f0;
+    border-radius: 15px 15px 0 0;
+    transition: filter 0.3s ease;
+}
 
-    .card-body p {
-        color: #6c757d; /* Muted text for secondary content */
-    }
+.card img:hover {
+    filter: brightness(0.9); /* Slight darkening for focus */
+}
 
-    .card-body a {
-        color: #007bff;
-        text-decoration: none;
-        font-size: 0.9rem;
-    }
+.card-body {
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333333;
+}
 
-    .card-body a:hover {
-        text-decoration: underline;
-    }
+.card-body h5 {
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
 
-    /* Grid layout */
-    .image-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Wider cards */
-        gap: 20px; /* More spacing between cards */
-    }
+.card-body p {
+    color: #6c757d;
+    line-height: 1.5; /* Improved readability */
+}
 
-    .image-item {
-        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
-    }
+.card-body a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500; /* Slightly bold for better emphasis */
+    transition: color 0.3s ease;
+}
 
-    .image-item:hover {
-        transform: scale(1.05); /* Slight zoom effect */
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
-    }
+.card-body a:hover {
+    text-decoration: underline;
+    color: #0056b3; /* Darker shade for hover */
+}
 
-    /* Caption styles */
-    .post-caption {
-        max-height: 60px;
-        overflow: hidden;
-        position: relative;
-        transition: max-height 0.3s ease;
-    }
+/* Grid layout */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px; /* More spacing between cards for balance */
+    padding: 10px; /* Padding around the grid */
+}
 
-    .post-caption.expanded {
-        max-height: none;
-    }
+.image-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden; /* Maintain shape for hover effects */
+}
 
-    .show-more-btn {
-        position: absolute;
-        bottom: 5px;
-        right: 0;
-        background: transparent;
-        border: none;
-        color: #007bff;
-        cursor: pointer;
-    }
+.image-item:hover {
+    transform: scale(1.05); /* Slight zoom */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.1); /* Enhanced brightness for focus */
+}
 
-    .show-more-btn:focus {
-        outline: none;
-    }
+/* Caption styles */
+.post-caption {
+    max-height: 60px;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.3s ease, background-color 0.3s ease;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px; /* Rounded corners for a cleaner look */
+}
+
+.post-caption.expanded {
+    max-height: none;
+    background-color: #f0f0f0;
+}
+
+.show-more-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 10px; /* Added padding for alignment */
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.show-more-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.1); /* Slight zoom effect */
+}
+
+.show-more-btn:focus {
+    outline: none;
+}
 </style>
 
 </head>
