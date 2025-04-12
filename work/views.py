@@ -6,6 +6,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Followers, LikePost, Post, Profile,Comment
 from django.db.models import Q
+import stripe
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from django.shortcuts import render
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def signup(request):
@@ -237,3 +244,29 @@ def follow(request):
             return redirect('/profile/' + user)
     else:
         return redirect('/')
+
+def payment_page(request):
+    return render(request, 'payment.html', {
+        'stripe_publishable_key': settings.STRIPE_PUBLISHABLE_KEY
+    })
+
+@csrf_exempt
+def create_checkout_session(request):
+    if request.method == 'POST':
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {
+                        'name': 'Premium Access',
+                    },
+                    'unit_amount': 1000,  # $10.00
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url='http://localhost:8000/payment-success/',
+            cancel_url='http://localhost:8000/payment-cancel/',
+        )
+        return JsonResponse({'id': session.id})

@@ -51,6 +51,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'researchers.urls'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_...'  # public key
+STRIPE_SECRET_KEY = 'sk_test_...'       # secret key
 
 TEMPLATES = [
     {

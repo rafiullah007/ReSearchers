@@ -18,5 +18,9 @@ urlpatterns = [
     path('search-results/', views.search_results, name='search_results'),
     path('follow', views.follow, name='follow'),
     path('add-comment/<uuid:post_id>/', views.add_comment, name='add_comment'),
+    path('payment/', views.payment_page, name='payment'),
+    path('create-checkout-session/', views.create_checkout_session, name='create-checkout-session'),
+    path('payment-success/', views.payment_page, name='payment-success'),
+    path('payment-cancel/', views.payment_page, name='payment-cancel'),
 
 ]
